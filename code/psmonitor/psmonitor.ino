@@ -8,7 +8,7 @@
  *
  * This sketch implements the firmware for a voltage and current monitor that can be retrofitted
  * to an existing symmetric, dual output power supply (i.e. a supply with positive and negative
- * outputs of the same magnitude). The firmware is for a specific hardware design.
+ * outputs of the same magnitude). The firmware is for a custom hardware design.
  *
  * Normally, the sketch will take current and voltage measurements for both positive
  * and negative supplies, correct for measurement errors, and display on the LCD.
