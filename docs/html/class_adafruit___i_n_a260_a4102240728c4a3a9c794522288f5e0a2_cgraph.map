@@ -1,0 +1,6 @@
+<map id="Adafruit_INA260::begin" name="Adafruit_INA260::begin">
+<area shape="rect" id="Node000001" title="Sets up the HW." alt="" coords="5,29,159,56"/>
+<area shape="rect" id="Node000002" href="$class_adafruit___i_n_a260.html#a733d6f4f8cf1879f6736929bb3fc10cc" title="Resets the harware. All registers are set to default values, the same as a power&#45;on reset." alt="" coords="207,29,358,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,40,191,40,191,45,159,45"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="248,30,242,21,246,11,260,5,282,3,306,5,319,12,317,16,305,10,282,8,261,10,250,15,247,20,253,27"/>
+</map>

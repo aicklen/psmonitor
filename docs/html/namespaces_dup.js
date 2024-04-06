@@ -1,0 +1,77 @@
+var namespaces_dup =
+[
+    [ "BuzzerTask", "namespaceBuzzerTask.html", [
+      [ "beep", "namespaceBuzzerTask.html#a0e0401c8601a93ec505c0bb2dbc758cf", null ],
+      [ "mute", "namespaceBuzzerTask.html#affaf47ad34e356660327e37facc44b8d", null ],
+      [ "setup", "namespaceBuzzerTask.html#a029f68ae4dec9ed5dfa64e6d97a4e5d1", null ],
+      [ "toggleMute", "namespaceBuzzerTask.html#ab13b76757e75afc63a474292d61d8e19", null ],
+      [ "unmute", "namespaceBuzzerTask.html#aa22719b8312b4f21d857b0086447188f", null ],
+      [ "update", "namespaceBuzzerTask.html#abe6ee2eb33347fa70d1aabd2441656b4", null ],
+      [ "beepData", "namespaceBuzzerTask.html#af308074481d7d7833662604933a2fb79", null ],
+      [ "buzzerOff", "namespaceBuzzerTask.html#abd6d0f7f411b4897cde97400239ae92f", null ],
+      [ "buzzerOn", "namespaceBuzzerTask.html#a70e491415cb7b8aea3774b435244e5f7", null ],
+      [ "buzzerPin", "namespaceBuzzerTask.html#af5350bb31606bac53c3b967f505336b8", null ],
+      [ "count", "namespaceBuzzerTask.html#ac2b473eb3b9ced00c020e7f851d9e02a", null ],
+      [ "currentTime", "namespaceBuzzerTask.html#a22f156bb729fad971da70fb7ba876b28", null ],
+      [ "doingBeepSpacing", "namespaceBuzzerTask.html#afa652ca6a26754d237391ba1985c0f85", null ],
+      [ "duration", "namespaceBuzzerTask.html#ab8bc3179aa31d01ac0743c751b024f37", null ],
+      [ "muteMode", "namespaceBuzzerTask.html#a8df3ba518ec8e6df6eec5c4c45ac1c97", null ],
+      [ "rolloverThreshold", "namespaceBuzzerTask.html#a88316a484eef60520ef86a9afe5509e6", null ],
+      [ "targetTime", "namespaceBuzzerTask.html#a9f95a9590f1ad3b214400512da8d68c7", null ]
+    ] ],
+    [ "CalibrateTask", "namespaceCalibrateTask.html", [
+      [ "CALIBRATE_INDEX", "namespaceCalibrateTask.html#af21473fe5988198ba7acbeb0de1dc91f", null ],
+      [ "CALIBRATE_STATE", "namespaceCalibrateTask.html#a29d833dfee45a124d9f57a589f31dfd6", null ],
+      [ "_index", "namespaceCalibrateTask.html#a26b9b50958af372b2a9899231f4daae1", [
+        [ "CALIBRATE_X1", "namespaceCalibrateTask.html#a26b9b50958af372b2a9899231f4daae1a3cbf3a1286c4ba9b2484697d66d04805", null ],
+        [ "CALIBRATE_Y1", "namespaceCalibrateTask.html#a26b9b50958af372b2a9899231f4daae1a5e9d54b09850e30d835bed4a0bb5d20e", null ],
+        [ "CALIBRATE_X2", "namespaceCalibrateTask.html#a26b9b50958af372b2a9899231f4daae1a5644a95f2753a5e0459b3575bc508174", null ],
+        [ "CALIBRATE_Y2", "namespaceCalibrateTask.html#a26b9b50958af372b2a9899231f4daae1a943e6bf7c39b6f45d8220db6b35b74e8", null ]
+      ] ],
+      [ "_state", "namespaceCalibrateTask.html#a67557c3bf07a36e2934241bb87d73f0d", [
+        [ "CALIBRATE_INITIALIZE", "namespaceCalibrateTask.html#a67557c3bf07a36e2934241bb87d73f0da41b83d9d9e3483bcfd563c0450a9b297", null ],
+        [ "CALIBRATE_PROMPT_V1", "namespaceCalibrateTask.html#a67557c3bf07a36e2934241bb87d73f0daa43f61968c1b457e7827eeb776a12a5b", null ],
+        [ "CALIBRATE_READ_V1_PROMPT_V2", "namespaceCalibrateTask.html#a67557c3bf07a36e2934241bb87d73f0da1adb4d075432e1629a48007673847016", null ],
+        [ "CALIBRATE_READ_V2_PROMPT_I1", "namespaceCalibrateTask.html#a67557c3bf07a36e2934241bb87d73f0da779e6673e5342681241d2f981be07a98", null ],
+        [ "CALIBRATE_READ_I1_PROMPT_I2", "namespaceCalibrateTask.html#a67557c3bf07a36e2934241bb87d73f0dac5a83160904b630812dfb8a0d335532d", null ],
+        [ "CALIBRATE_READ_I2_FINISH", "namespaceCalibrateTask.html#a67557c3bf07a36e2934241bb87d73f0dad11b283c4f7aeca16bd41a1af6033ff3", null ]
+      ] ],
+      [ "buttonPress", "namespaceCalibrateTask.html#a47c6c32099c84015796490fb7c93c8f2", null ],
+      [ "finished", "namespaceCalibrateTask.html#a1215ba8844fcfc693959e4ed9cffb966", null ],
+      [ "generateVoltageString", "namespaceCalibrateTask.html#ae966a2eb52e9753427c69567b8328cf8", null ],
+      [ "setup", "namespaceCalibrateTask.html#a3039cc0110802bfc065c0dd9e84b1b11", null ],
+      [ "update", "namespaceCalibrateTask.html#a6640484777362f2d51873ac1aecf3f1f", null ],
+      [ "CALIBRATE_I1", "namespaceCalibrateTask.html#a5219c4b4faa3cfa802740cc1b776d870", null ],
+      [ "CALIBRATE_I2", "namespaceCalibrateTask.html#af6bb891999f91333223b5811182d42ab", null ],
+      [ "CALIBRATE_V1", "namespaceCalibrateTask.html#affdb1d7fb9909ca18784b26935010e6d", null ],
+      [ "CALIBRATE_V2", "namespaceCalibrateTask.html#a9a96eadf4b6a380389e1dea611140a96", null ],
+      [ "chr1", "namespaceCalibrateTask.html#aa5694cd1a2f84ea34879cc7914b526e7", null ],
+      [ "currentState", "namespaceCalibrateTask.html#abf6f574603bb11fde2f120aff9a3485f", null ],
+      [ "executeStep", "namespaceCalibrateTask.html#a1641308436f7fd549cc78891fae46fed", null ],
+      [ "finishedFlag", "namespaceCalibrateTask.html#aee732eab5c5a9fde1df77910aaa75d5b", null ],
+      [ "lcd", "namespaceCalibrateTask.html#a03b875117461359182f7ba36de12bf59", null ],
+      [ "PROGMEM", "namespaceCalibrateTask.html#a7124f004a38a847a103e640164e6cf17", null ],
+      [ "rawPoints", "namespaceCalibrateTask.html#a88918e79f4b2e543132316c9fc4142c9", null ]
+    ] ],
+    [ "MonitorTask", "namespaceMonitorTask.html", [
+      [ "communicationOK", "namespaceMonitorTask.html#a042ed723625dbcff52d8cb8def507736", null ],
+      [ "generateVoltageString", "namespaceMonitorTask.html#ac84237809d293d7cac6006ad3290a4ac", null ],
+      [ "getRawValues", "namespaceMonitorTask.html#acc22bc7d529ec732e5f43a348e577f96", null ],
+      [ "nearest10", "namespaceMonitorTask.html#a7c2a3bea5eba025902cb5014fce85632", null ],
+      [ "setAveragingCount", "namespaceMonitorTask.html#a4a03c93a2c529dbc728e30b0fa1ce0d4", null ],
+      [ "setConversionTime", "namespaceMonitorTask.html#a3c7ed68059744d001e782b27f26797d6", null ],
+      [ "setup", "namespaceMonitorTask.html#a5354b0cc977afe61e47b082f08dbcb80", null ],
+      [ "update", "namespaceMonitorTask.html#aa848694eaaf58e5cb9c1d8646bebd0ed", null ],
+      [ "alert", "namespaceMonitorTask.html#a6b123fb1caa4d31d5ab5bd8e4b377036", null ],
+      [ "beep_count", "namespaceMonitorTask.html#a97809dd622d90ee38d170940a59e6d84", null ],
+      [ "commOKFlag", "namespaceMonitorTask.html#ab23285978e1523aa7fcf0d70f45fc6f8", null ],
+      [ "currentTime", "namespaceMonitorTask.html#a085a321cc1136bc5a137d9c2dd954b7b", null ],
+      [ "ina260Neg", "namespaceMonitorTask.html#aa49238dc8f5bf6ad1fdd8cc96bcd193d", null ],
+      [ "ina260Pos", "namespaceMonitorTask.html#a6b507f770447cf575a4bdd6e95094cf7", null ],
+      [ "lcd", "namespaceMonitorTask.html#a48dff4b7d19d14087901427fc9c222bd", null ],
+      [ "rolloverThreshold", "namespaceMonitorTask.html#ab8b767a89a6c28b80906c152fe3e890c", null ],
+      [ "startedFlag", "namespaceMonitorTask.html#a87ecf5f1669b9319d2fd72e385fd2e03", null ],
+      [ "targetTime", "namespaceMonitorTask.html#a66eba45fb72c3ee0e57a9ff3a383fa92", null ],
+      [ "taskInterval", "namespaceMonitorTask.html#aee713c780fb5d1ae301e4cf1ab2bc158", null ]
+    ] ]
+];

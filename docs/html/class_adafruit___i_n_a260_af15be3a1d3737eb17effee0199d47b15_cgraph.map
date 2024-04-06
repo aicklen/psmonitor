@@ -1,0 +1,5 @@
+<map id="Adafruit_INA260::readCurrentInt16" name="Adafruit_INA260::readCurrentInt16">
+<area shape="rect" id="Node000001" title="Reads integer ADC count of the current value of the Current register." alt="" coords="5,5,195,48"/>
+<area shape="rect" id="Node000002" href="$class_adafruit___i_n_a260.html#a3cab432c4753056f1bbee145fd4d5999" title="Reads integer ADC count of the current value of the Current register." alt="" coords="243,13,457,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,24,227,24,227,29,195,29"/>
+</map>

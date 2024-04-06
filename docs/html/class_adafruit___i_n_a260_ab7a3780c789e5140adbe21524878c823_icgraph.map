@@ -1,0 +1,7 @@
+<map id="Adafruit_INA260::readBusVoltageRaw" name="Adafruit_INA260::readBusVoltageRaw">
+<area shape="rect" id="Node000001" title="Reads integer ADC count of the current value of the Bus Voltage register." alt="" coords="224,39,394,81"/>
+<area shape="rect" id="Node000002" href="$class_adafruit___i_n_a260.html#ade32336f058e508b2f10daeeb094069f" title="Reads and scales the current value of the Bus Voltage register." alt="" coords="5,5,176,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,47,176,42,177,37,209,42"/>
+<area shape="rect" id="Node000003" href="$class_adafruit___i_n_a260.html#ace01e6823ec53e9c2c4eef1c61ffde26" title="Reads integer ADC count of the current value of the Bus Voltage register." alt="" coords="5,72,176,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="209,78,177,83,176,78,208,73"/>
+</map>

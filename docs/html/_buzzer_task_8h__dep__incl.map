@@ -1,0 +1,5 @@
+<map id="BuzzerTask.h" name="BuzzerTask.h">
+<area shape="rect" id="Node000001" title="Header file for BuzzerTask." alt="" coords="12,5,114,32"/>
+<area shape="rect" id="Node000002" href="$_buzzer_task_8cpp.html" title="Implements a BuzzerTask that manages buzzer activation, duration, and repetition." alt="" coords="5,80,121,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,48,66,80,60,80,60,48"/>
+</map>
