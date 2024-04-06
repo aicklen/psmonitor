@@ -1,6 +1,6 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/aicklen/psmonitor/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/v/release/aicklen/psmonitor)](https://github.com/aicklen/psmonitor/releases)
+![GitHub Release](https://img.shields.io/github/v/release/aicklen/psmonitor?include_prereleases)
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/aicklen/psmonitor)
 
 
