@@ -1,6 +1,6 @@
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)(https://github.com/aicklen/psmonitor/blob/master/LICENSE))
-[![GitHub release](https://img.shields.io/github/v/release/aicklen/psmonitor)(https://github.com/aicklen/psmonitor/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/aicklen/psmonitor/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/v/release/aicklen/psmonitor)](https://github.com/aicklen/psmonitor/releases)
 
 # PSMonitor
 
@@ -12,7 +12,7 @@ Working. Tested on prototype hardware.
 
 This sketch implements the firmware for a voltage and current monitor that can be retrofitted
 to an existing symmetric, dual output power supply (i.e. a supply with positive and negative
-outputs of the same magnitude). The firmware is for a specific hardware design.
+outputs of the same magnitude). The firmware is for a custom hardware design, documented below.
 
 Normally, the sketch will take current and voltage measurements for both positive
 and negative supplies, correct for measurement errors, and display on the LCD.
@@ -28,9 +28,22 @@ by pressing the mute button once, and unmuted by pressing the mute button again.
 
 ### Hardware
 
-TBD
+This sketch is designed to run on specific hardware, shown below. The hardware,
+designed using components already in my stock, was intended to be retrofit to an
+Elenco XP-720 power supply. The design would work well for many other power
+supplies, however, so it's published here.
 
-### Notes on Implementation
+#### Schematic
+
+![Schematic for Power Supply Monitor](https://github.com/aicklen/psmonitor/blob/master/schematic/psmonitor.pdf?raw=true)
+
+#### Notes on Hardware Implementation
+
+
+### Firmware
+
+
+#### Notes on Firmware Implementation
 
 TBD
 
@@ -48,3 +61,4 @@ TBD
 ### Could
 
 - Improve displayed calibration instructions
+- Include an option to control the 1602A LCD display through I2C
