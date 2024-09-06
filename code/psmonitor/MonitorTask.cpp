@@ -37,6 +37,9 @@
 // Include other tasks that are part of this application
 #include "BuzzerTask.h"
 
+// Include calibration support
+#include "Calibration.h"
+
 // When any output exceeds the design range, beep once for every
 // OVER_RANGE_BEEP_N times the Monitor task runs.
 #define OVER_RANGE_BEEP_N 10
@@ -175,12 +178,12 @@ namespace MonitorTask {
         }
 
         // Process voltage readings
-        readings[MONITOR_VOLTAGE_POS] = nearest10(ina260Pos.readBusVoltageInt16());
-        readings[MONITOR_VOLTAGE_NEG] = -nearest10(ina260Neg.readBusVoltageInt16());
+        readings[MONITOR_VOLTAGE_POS] = nearest10( Calibration::correct(DATA_VOLTAGE_POS, ina260Pos.readBusVoltageInt16()) );
+        readings[MONITOR_VOLTAGE_NEG] = -nearest10( Calibration::correct(DATA_VOLTAGE_NEG, ina260Neg.readBusVoltageInt16()) );
     
         // Process current readings (current always treated as positive)
-        readings[MONITOR_CURRENT_POS] = ina260Pos.readCurrentInt16() + 3;  /// @todo Use calibration data to correct positive current reading
-        readings[MONITOR_CURRENT_NEG] = ina260Neg.readCurrentInt16() + 2;  /// @todo Use calibration data to correct negative current reading
+        readings[MONITOR_CURRENT_POS] = Calibration::correct(DATA_CURRENT_POS, ina260Pos.readCurrentInt16());
+        readings[MONITOR_CURRENT_NEG] = Calibration::correct(DATA_CURRENT_NEG, ina260Neg.readCurrentInt16());
 
         // Check all voltages and current against specifications (all currents are treated as positive)
         alert[MONITOR_VOLTAGE_POS] = (readings[MONITOR_VOLTAGE_POS] > LIMIT_MAX_VOLTAGE);

@@ -12,15 +12,28 @@
 #define _MONITORTASK_H
 
 // Include third party libraries
+#include "Adafruit_INA260.h"
 #include <LiquidCrystal.h>
 
-/// Indexes into readings[] returned by Monitor task.
+// Indexes into readings[] returned by Monitor task.
 typedef enum _select {
     MONITOR_VOLTAGE_POS = 0,    /// Index of positive voltage reading
     MONITOR_VOLTAGE_NEG = 1,    /// Index of negative voltage reading
     MONITOR_CURRENT_POS = 2,    /// Index of positive current reading
     MONITOR_CURRENT_NEG = 3,    /// Index of negative current reading
 } MONITOR_SELECT_VALUE;
+
+// Relative indexes into readings[] returned by Monitor task (measurement type)
+typedef enum _select_type {
+    MONITOR_VOLTAGE = 0,    /// Index of positive voltage reading
+    MONITOR_CURRENT = 2,    /// Index of positive current reading
+} MONITOR_SELECT_TYPE;
+
+// Relative indexes into measurement types in readings[] returned by Monitor task
+typedef enum _select_sign {
+    MONITOR_POS = 0,    /// Index of positive reading
+    MONITOR_NEG = 1,    /// Index of negative reading
+} MONITOR_SELECT_SIGN;
 
 namespace MonitorTask {
 

@@ -129,21 +129,21 @@ public:
   bool begin(uint8_t i2c_addr = INA260_I2CADDR_DEFAULT,
              TwoWire *theWire = &Wire);
   void reset(void);
-  float readCurrent(void);
+  int16_t readCurrent(void);
   int16_t readCurrentRaw(void);
   int16_t readCurrentInt16(void);
-  float readBusVoltage(void);
+  int16_t readBusVoltage(void);
   int16_t readBusVoltageRaw(void);
   int16_t readBusVoltageInt16(void);
-  float readPower(void);
+  int16_t readPower(void);
   void setMode(INA260_MeasurementMode mode);
   INA260_MeasurementMode getMode(void);
 
   bool conversionReady(void);
   bool alertFunctionFlag(void);
 
-  float getAlertLimit(void);
-  void setAlertLimit(float limit);
+  int16_t getAlertLimit(void);
+  void setAlertLimit(int16_t limit);
   INA260_AlertLatch getAlertLatch(void);
   void setAlertLatch(INA260_AlertLatch state);
   INA260_AlertPolarity getAlertPolarity(void);

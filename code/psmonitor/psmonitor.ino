@@ -36,6 +36,9 @@
 #include "CalibrateTask.h"
 #include "MonitorTask.h"
 
+// Project specific headers
+#include "Calibration.h"
+
 // Create an LCD object.
 // Initialize the library by mapping any LCD interface pins to the
 // matching arduino pin number.
@@ -55,6 +58,7 @@ LiquidCrystal lcd(RS, EN, D2, D3, D4, D5);
 byte previous_button_state = HIGH;
 #define MODE_NORMAL 0
 #define MODE_CALIBRATE 1
+#define MODE_TERMINATE 2
 byte currentMode = MODE_NORMAL;
 
 // Monitor task setup
@@ -64,7 +68,6 @@ byte currentMode = MODE_NORMAL;
 
 // Buffer for string manipulation; global
 char string_buf[17];
-
 
 /**
 * @brief Configures the power supply monitor; runs once on powerup or reset.
@@ -91,6 +94,9 @@ void setup() {
     // Setup the Calibrate task
     CalibrateTask::setup(&lcd);
 
+    // Read existing calibration data, if any
+    Calibration::recall();
+
     // Can monitor task communicate with sensors?
     if (!MonitorTask::communicationOK()) {
         lcd.setCursor(5, 0);
@@ -98,7 +104,7 @@ void setup() {
         lcd.setCursor(0, 1);
         lcd.print(F("Sensor Comm Bad?"));
         BuzzerTask::beep(BEEP_LONG, 3);
-        while (1);  // Stop the program here on fault detected
+        currentMode = MODE_TERMINATE;
     }
 	
     // Initialize monitoring hardware
@@ -111,7 +117,7 @@ void setup() {
         BuzzerTask::beep(BEEP_MEDIUM, 2);
         currentMode = MODE_CALIBRATE;
     }
-    // If mute/calibrate button mot being held down, just beep
+    // If mute/calibrate button not being held down, just beep
     else {
         BuzzerTask::beep(BEEP_SHORT, 1);
     }
@@ -124,7 +130,7 @@ void setup() {
 */
 void loop() {
     // Check mute/calibrate button; toggle mute mode if button state has
-    // transitioned from from HIGH to LOW since last check (edge triggered)
+    // transitioned from from HIGH to LOW since last check ("edge" triggered)
     if (digitalRead(BUTTON_PIN) == LOW) {
         if (previous_button_state == HIGH) {
             previous_button_state = LOW;
@@ -149,6 +155,8 @@ void loop() {
 
     // Dispatch to monitor or calibrate task, depending on current operational mode.
     switch(currentMode) {
+    case MODE_TERMINATE:
+        break;
     case MODE_CALIBRATE:
         if (CalibrateTask::finished()) {
             currentMode = MODE_NORMAL;
@@ -156,6 +164,7 @@ void loop() {
             break;
         }
         CalibrateTask::update();
+        Calibration::recall();
         break;
     case MODE_NORMAL:
     default:
