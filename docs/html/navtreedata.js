@@ -25,6 +25,13 @@
 var NAVTREE =
 [
   [ "psmonitor", "index.html", [
+    [ "Adafruit INA260 I2C Current and Power sensor", "index.html", [
+      [ "Introduction", "index.html#intro_sec", null ],
+      [ "Dependencies", "index.html#dependencies", null ],
+      [ "Author", "index.html#author", null ],
+      [ "License", "index.html#license", null ],
+      [ "HISTORY", "index.html#HISTORY", null ]
+    ] ],
     [ "Todo List", "todo.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
@@ -52,7 +59,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"Adafruit__INA260_8cpp_source.html"
+"Adafruit__INA260_8cpp_source.html",
+"index.html#intro_sec"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

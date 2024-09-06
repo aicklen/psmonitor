@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['adafruit_5fina260_0',['Adafruit_INA260',['../classAdafruit__INA260.html',1,'']]]
+  ['_5fcal_5fdata_128',['_cal_data',['../structCalibration_1_1__cal__data.html',1,'Calibration']]]
 ];

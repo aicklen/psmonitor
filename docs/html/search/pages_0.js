@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['list_0',['Todo List',['../todo.html',1,'']]]
+  ['adafruit_20ina260_20i2c_20current_20and_20power_20sensor_255',['Adafruit INA260 I2C Current and Power sensor',['../index.html',1,'']]]
 ];
