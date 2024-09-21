@@ -141,7 +141,6 @@ is complete and Normal mode should be entered
 
 ### Should
 
-- Implement a method to cancel calibration mode with no changes to calibration data
 - Improve the documentation
 
 ### Could
