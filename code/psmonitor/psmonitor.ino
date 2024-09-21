@@ -91,12 +91,6 @@ void setup() {
                        MONITOR_POS_ADDR,
                        MONITOR_NEG_ADDR, &lcd);
 
-    // Setup the Calibrate task
-    CalibrateTask::setup(&lcd);
-
-    // Read existing calibration data, if any
-    Calibration::recall();
-
     // Can monitor task communicate with sensors?
     if (!MonitorTask::communicationOK()) {
         lcd.setCursor(5, 0);
@@ -106,20 +100,28 @@ void setup() {
         BuzzerTask::beep(BEEP_LONG, 3);
         currentMode = MODE_TERMINATE;
     }
-	
-    // Initialize monitoring hardware
-    MonitorTask::setAveragingCount(INA260_COUNT_16);
-    MonitorTask::setConversionTime(INA260_TIME_2_116_ms);
-
-    // Check the mute/calibrate button; if low at powerup, then set calibrate mode
-    if (digitalRead(BUTTON_PIN) == LOW) {
-        previous_button_state = LOW;
-        BuzzerTask::beep(BEEP_MEDIUM, 2);
-        currentMode = MODE_CALIBRATE;
-    }
-    // If mute/calibrate button not being held down, just beep
     else {
-        BuzzerTask::beep(BEEP_SHORT, 1);
+      
+        // Initialize monitoring hardware
+        MonitorTask::setAveragingCount(INA260_COUNT_16);
+        MonitorTask::setConversionTime(INA260_TIME_2_116_ms);
+
+        // Setup the Calibrate task
+        CalibrateTask::setup(&lcd);
+
+        // Read existing calibration data, if any
+        Calibration::recall();
+
+        // Check the mute/calibrate button; if low at powerup, then set calibrate mode
+        if (digitalRead(BUTTON_PIN) == LOW) {
+            previous_button_state = LOW;
+            BuzzerTask::beep(BEEP_MEDIUM, 2);
+            currentMode = MODE_CALIBRATE;
+        }
+        // If mute/calibrate button not being held down, just beep
+        else {
+            BuzzerTask::beep(BEEP_SHORT, 1);
+        }
     }
 }
 

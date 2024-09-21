@@ -14,7 +14,7 @@ Status: working. Tested on prototype hardware.
 
 This project provides a custom hardware design and firmware for a voltage and current monitor that can be retrofitted
 to an existing symmetric, dual output power supply (i.e. a supply with positive and negative
-outputs of the same magnitude).
+outputs of the same magnitude) with outputs up to +30/-30 volts.
 
 ### Hardware
 
@@ -47,7 +47,7 @@ to system ground. The negative side measurement is between system ground and
 the negative side floating "ground", which is positive at the magnitude of the negative output.
 
 The INA260 devices operate From a 2.7V to 5.5V supply, which is handy in the implementation of
-monitoring for the negative supply. An LM317 is used to generate an approximate 3.75V supply for the
+monitoring for the negative supply. An LM317 is used to generate an approximate 3.3V supply for the
 negative side INA260 using the difference between the 5V system supply and the lowest setting
 of the negative supply (-1.25V); this value is well within the INA260 specifications while
 keeping the input to the LM317 above the dropout voltage.
@@ -83,6 +83,9 @@ default condition and is entered into after powerup. If the mute/calibrate butto
 is held down during powerup until the Arduino Nano has finished booting, then
 Calibration mode will be entered. Once calibration is completed, the firmware transitions to
 Normal mode and continues in that mode until the next power cycle.
+
+_Note: If Calibration mode is entered inadvertently, cycling power (or resetting the Arduino if the
+reset button is accessible) is required to exit Calibration mode without changing any existing calibration data._
 
 Normally, the firmware will take current and voltage measurements for both positive
 and negative supplies, correct for measurement errors, and display on the LCD.
