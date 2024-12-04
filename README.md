@@ -136,7 +136,8 @@ is complete and Normal mode should be entered
 
 ### Must
 
-- Implement calibration function inside the calibration task
+- Implement calibration function inside the calibration task (accuracy without calibration is quite good,
+  but every little bit helps!)
 - Move all configuration values into a single include file
 
 ### Should
