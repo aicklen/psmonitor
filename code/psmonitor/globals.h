@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @file globals.h
  * @copyright

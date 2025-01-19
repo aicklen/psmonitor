@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @file Fixed.h
  * @copyright
@@ -12,17 +13,15 @@
 #ifndef _FIXED_H
 #define _FIXED_H
 
-typedef int32_t fixed;
+using fixed = int32_t;
 
 namespace Fixed {
 
-    const int shift PROGMEM = 5;
+    fixed int2fixed(const int16_t value);
+    int16_t fixed2int(const fixed value);
 
-    fixed int2fixed(int16_t value);
-    int16_t fixed2int(fixed value);
-
-    fixed multiply(fixed value1, fixed value2);
-    fixed invert(fixed value);
+    fixed multiply(const fixed value1, const fixed value2);
+    fixed invert(const fixed value);
 
 }
 

@@ -1,3 +1,4 @@
+#pragma once
 /**
  * @file MonitorTask.h
  * @copyright
@@ -16,31 +17,31 @@
 #include <LiquidCrystal.h>
 
 // Indexes into readings[] returned by Monitor task.
-typedef enum _select {
-    MONITOR_VOLTAGE_POS = 0,    /// Index of positive voltage reading
-    MONITOR_VOLTAGE_NEG = 1,    /// Index of negative voltage reading
-    MONITOR_CURRENT_POS = 2,    /// Index of positive current reading
-    MONITOR_CURRENT_NEG = 3,    /// Index of negative current reading
-} MONITOR_SELECT_VALUE;
+enum MONITOR_SELECT_VALUE : int16_t {
+    MONITOR_VOLTAGE_POS = 0,
+    MONITOR_VOLTAGE_NEG = 1,
+    MONITOR_CURRENT_POS = 2,
+    MONITOR_CURRENT_NEG = 3,
+};
 
-// Relative indexes into readings[] returned by Monitor task (measurement type)
-typedef enum _select_type {
-    MONITOR_VOLTAGE = 0,    /// Index of positive voltage reading
-    MONITOR_CURRENT = 2,    /// Index of positive current reading
-} MONITOR_SELECT_TYPE;
+// Relative indexes into readings[] grouped by measurement type
+enum MONITOR_SELECT_GROUP : int16_t {
+    MONITOR_VOLTAGE = 0,
+    MONITOR_CURRENT = 2,
+};
 
-// Relative indexes into measurement types in readings[] returned by Monitor task
-typedef enum _select_sign {
-    MONITOR_POS = 0,    /// Index of positive reading
-    MONITOR_NEG = 1,    /// Index of negative reading
-} MONITOR_SELECT_SIGN;
+// Relative indexes into readings[] groups
+enum MONITOR_SELECT_SIGN : int16_t {
+    MONITOR_POS = 0,
+    MONITOR_NEG = 1,
+};
 
 namespace MonitorTask {
 
-    void setup(unsigned long interval,
-                           uint8_t pos_addr,
-                           uint8_t neg_addr,
-                           LiquidCrystal *display);
+    void setup(const uint32_t interval,
+               const uint8_t pos_addr,
+               const uint8_t neg_addr,
+               LiquidCrystal *display);
 
     // Normal methods
     bool communicationOK(void);

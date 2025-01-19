@@ -26,22 +26,22 @@
 
 namespace BuzzerTask {
 
-    bool muteMode = false;
+    auto muteMode = bool{false};
 
-    uint8_t buzzerPin;
-    uint8_t buzzerOn;
-    uint8_t buzzerOff;
+    auto buzzerPin = uint8_t{};
+    auto buzzerOn = uint8_t{};
+    auto buzzerOff = uint8_t{};
 
     struct {
-        unsigned duration = 0;
-        unsigned count = 0;
+        uint16_t duration = 0;
+        uint16_t count = 0;
         bool doingBeepSpacing = false;
     } beepData;
 
     // Task timing (all in milliseconds)
-    unsigned long rolloverThreshold;  // Should be 10*taskInterval
-    unsigned long currentTime;
-    unsigned long targetTime = 0;
+    constexpr uint32_t rolloverThreshold = static_cast<uint32_t>(100ul) * BEEP_LONG;
+    auto currentTime = uint32_t{};
+    auto targetTime = uint32_t{0};
 
     /**
     * @brief Configures the Buzzer task to the Arduino hardware in use.
@@ -50,11 +50,9 @@ namespace BuzzerTask {
     * @param on_value  The value (HIGH or LOW) that turns on the buzzer
     * @param off_value The value (HIGH or LOW) that turns off the buzzer
     */
-    void setup(uint8_t pin,
-                        uint8_t on_value,
-                        uint8_t off_value) {
-        // Should be 100 * longest beep duration
-        rolloverThreshold = (unsigned long)100 * (unsigned long)BEEP_LONG;
+    void setup(const uint8_t pin,
+               const uint8_t on_value,
+               const uint8_t off_value) {
 
         buzzerPin = pin;
         buzzerOn = on_value;
@@ -67,7 +65,7 @@ namespace BuzzerTask {
     * @param duration  The time in milliseconds to sound the buzzer
     * @param count     The number of times to sound the buzzer
     */
-    void beep(unsigned duration, unsigned count) {
+    void beep(const uint32_t duration, const uint32_t count) {
         if (count == 0) {
             return;
         }

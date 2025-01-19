@@ -51,23 +51,27 @@
 #include "limits.h"
 
 // Storage indexed to readings
-int16_t readings[4];
-//bool alert[4];
+int16_t readings[4] = {};
 
 namespace MonitorTask {
 
-    // Forward declarations
-    int16_t nearest10(int16_t value);
-    char* generateVoltageString(int16_t value);
+    // Forward declarations of functions used only in this task
+    namespace
+    {
+
+      int16_t nearest10(int16_t value);
+      char* generateVoltageString(int16_t value);
+
+    }
 
     bool commOKFlag = false;
     bool startedFlag = false;
     
     // Task timing (all in milliseconds)
-    unsigned long taskInterval = 250;
-    unsigned long rolloverThreshold = 2500;  // Should be 10*taskInterval
-    unsigned long currentTime;
-    unsigned long targetTime = 0;
+    auto taskInterval = uint32_t{};
+    auto rolloverThreshold = uint32_t{};  // Should be 100*taskInterval
+    auto currentTime = uint32_t{};
+    auto targetTime = uint32_t{0};
 
     // Buzzer management when alerting on over spec usage
     uint8_t beep_count = 0;
@@ -93,15 +97,15 @@ namespace MonitorTask {
     *
     * @todo Retrieve calibration data from EEPROM
     */
-    void setup(unsigned long interval,
-               uint8_t pos_addr,
-               uint8_t neg_addr,
+    void setup(const uint32_t interval,
+               const uint8_t pos_addr,
+               const uint8_t neg_addr,
                LiquidCrystal *display) {
 
         // This initialization only performed once
         // Initialize state variables
         taskInterval = interval;
-        rolloverThreshold = 100 * taskInterval;
+        rolloverThreshold = static_cast<uint32_t>(100) * taskInterval;
 
         // Initialize and verify communication with the ina260 devices
         if (ina260Pos.begin(pos_addr) && ina260Neg.begin(neg_addr)) {
@@ -243,40 +247,46 @@ namespace MonitorTask {
         readings[MONITOR_CURRENT_NEG] = ina260Neg.readCurrentRaw();
     }
 
-    /**
-    * @brief Round integer to nearest multiple of 10.
-    *
-    * @return Rounded integer
-    */
-    int16_t nearest10(int16_t value) {
-        int16_t a = (value / 10) * 10;
-        if ((value - a) >= 5) {
-            return a + 10;
-        }
-        return a;
-    }
+    // Functions used only in this task
+    namespace
+    {
 
-    /**
-    * @brief Generates a voltage string from the provided integer value.
-    *
-    * Generate voltage string from provided value. Takes value in millivolts and presents as decimal
-    * volts with precision to hundredths of a volt.
-    *
-    * @param value   Integer value of voltage in millivolts
-    *
-    * @return String representing decimal volts to thousandths of a volt
-    */
-    char* generateVoltageString(int16_t value) {
-        // Generate the string from integer values
-        (void) sprintf(string_buf, "%+ 5d", value / 10);
-        // Set seventh character to nul to terminate string
-        string_buf[6] = 0;
-        // Move rightmost 2 digits to the right
-        string_buf[5] = string_buf[4];
-        string_buf[4] = string_buf[3];
-        // Add decimal point
-        string_buf[3] = '.';
-        return string_buf;
+      /**
+      * @brief Round integer to nearest multiple of 10.
+      *
+      * @return Rounded integer
+      */
+      int16_t nearest10(int16_t value) {
+          int16_t a = (value / 10) * 10;
+          if ((value - a) >= 5) {
+              return a + 10;
+          }
+          return a;
+      }
+
+      /**
+      * @brief Generates a voltage string from the provided integer value.
+      *
+      * Generate voltage string from provided value. Takes value in millivolts and presents as decimal
+      * volts with precision to hundredths of a volt.
+      *
+      * @param value   Integer value of voltage in millivolts
+      *
+      * @return String representing decimal volts to thousandths of a volt
+      */
+      char* generateVoltageString(int16_t value) {
+          // Generate the string from integer values
+          (void) sprintf(string_buf, "%+ 5d", value / 10);
+          // Set seventh character to nul to terminate string
+          string_buf[6] = 0;
+          // Move rightmost 2 digits to the right
+          string_buf[5] = string_buf[4];
+          string_buf[4] = string_buf[3];
+          // Add decimal point
+          string_buf[3] = '.';
+          return string_buf;
+      }
+
     }
 
 }

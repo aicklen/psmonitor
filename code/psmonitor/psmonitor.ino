@@ -42,32 +42,33 @@
 // Create an LCD object.
 // Initialize the library by mapping any LCD interface pins to the
 // matching arduino pin number.
-#define RS 12
-#define EN 11
-#define D2 2
-#define D3 3
-#define D4 4
-#define D5 5
+enum LC_PINS : int16_t {RS = 12, EN = 11, D2 = 2, D3 = 3, D4 = 4, D5 = 5};
 LiquidCrystal lcd(RS, EN, D2, D3, D4, D5);
 
 // Digital I/O lines used for other than the LCD
-#define BUZZER_PIN 6
-#define BUTTON_PIN 7
+enum DIGITAL_PINS : uint8_t {
+    BUZZER_PIN = 6,
+    BUTTON_PIN = 7,
+};
 
-// Various useful state variables
-byte previous_button_state = HIGH;
-#define MODE_NORMAL 0
-#define MODE_CALIBRATE 1
-#define MODE_TERMINATE 2
-byte currentMode = MODE_NORMAL;
+// Various useful state values
+uint8_t previous_button_state = HIGH;
+enum STATE : uint8_t {
+  MODE_NORMAL,
+  MODE_CALIBRATE,
+  MODE_TERMINATE,
+};
+uint8_t currentMode = MODE_NORMAL;
 
-// Monitor task setup
-#define MONITOR_INTERVAL 200  // Time between runs; in milliseconds
-#define MONITOR_POS_ADDR 0x40 // I2C address of positive voltage/current sensor
-#define MONITOR_NEG_ADDR 0x41 // I2C address of negative voltage/current sensor
+// Monitor task configuration
+enum MONITOR_CFG : uint32_t {MONITOR_INTERVAL = 200};  // Time between runs; in milliseconds
+enum MONITOR_ADR : uint8_t {
+    MONITOR_POS_ADDR = 0x40,  // I2C address of positive voltage/current sensor
+    MONITOR_NEG_ADDR = 0x41,  // I2C address of negative voltage/current sensor
+};
 
 // Buffer for string manipulation; global
-char string_buf[17];
+char string_buf[17] = {};
 
 /**
 * @brief Configures the power supply monitor; runs once on powerup or reset.

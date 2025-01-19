@@ -22,25 +22,24 @@
 
 namespace Fixed {
 
-//    const int shift PROGMEM = 5;
-    const fixed fixed_one = int2fixed(1) << shift;
+    const int16_t shift PROGMEM = 5;
 
-    fixed int2fixed(int16_t value){
-        return ((fixed) value) << shift;
+    fixed int2fixed(const int16_t value){
+        return static_cast<fixed>(value << shift);
     }
 
-    int16_t fixed2int(fixed value){
+    fixed fixed_one = int2fixed(1) << shift;
+
+    int16_t fixed2int(const fixed value){
         return (int16_t)(value >> shift);
     }
 
-    fixed multiply(fixed value1, fixed value2){
-        int64_t iv = (int64_t)value1 * (int64_t)value2;
-        return (fixed)(iv >> shift);
+    fixed multiply(const fixed value1, const fixed value2){
+        return static_cast<fixed>((static_cast<int64_t>(value1) * static_cast<int64_t>(value2)) >> shift);
     }
 
-    fixed invert(fixed value){
-        int64_t iv = ((int64_t)fixed_one << shift) / (int64_t)value;
-        return (fixed)iv;
+    fixed invert(const fixed value){
+        return static_cast<fixed>(((int64_t)fixed_one << shift) / (int64_t)value);
     }
 
 }

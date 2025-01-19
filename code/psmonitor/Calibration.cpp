@@ -45,11 +45,11 @@ extern int16_t readings[4];
 namespace Calibration {
 
     // A common struct for calibration data; change once and it changes eerywhere.
-    typedef struct _cal_data {
+    struct cal_data {
         int16_t offsets[4];    // Array of voltage and current offset corrections
         fixed gains[4];        // Fixed point array of voltage and current gain correction factors
         uint16_t crc;          // CRC value validating calibration data
-    } cal_data;
+    };
 
     // EEPROM struct containing calibration data
     cal_data eeprom_data;
@@ -58,7 +58,7 @@ namespace Calibration {
     cal_data calibration_defaults = {
         {0, 0, 0, 0},
         {Fixed::int2fixed(1), Fixed::int2fixed(1), Fixed::int2fixed(1), Fixed::int2fixed(1)},
-        calcCRC16((byte*) &calibration_defaults, sizeof(calibration_defaults) - sizeof(calibration_defaults.crc))
+        calcCRC16(reinterpret_cast<uint8_t*>(&calibration_defaults), sizeof(calibration_defaults) - sizeof(calibration_defaults.crc))
     };
 
     // Points to the working copy of current calibration data
@@ -66,8 +66,8 @@ namespace Calibration {
 
 
     // Manage recall of persistent calibration data
-    bool data_recalled = false;
-    bool data_valid = false;
+    auto data_recalled = bool{false};
+    auto data_valid = bool{false};
 
 
     /**
@@ -91,7 +91,7 @@ namespace Calibration {
     void recall(void) {
         EEPROM.get(CALIBRATION_DATA_ADDRESS, eeprom_data);
         data_recalled = true;
-        uint16_t check_crc = calcCRC16((byte*) &eeprom_data, sizeof(eeprom_data) - sizeof(eeprom_data.crc));
+        uint16_t check_crc = calcCRC16(reinterpret_cast<uint8_t*>(&eeprom_data), sizeof(eeprom_data) - sizeof(eeprom_data.crc));
         if (eeprom_data.crc == check_crc) {
             data_valid = true;
             calibration_data = &eeprom_data;
@@ -137,7 +137,7 @@ namespace Calibration {
     * @param value        Voltage or current to be corrected.
     */
 
-    int16_t correct(int param_id, int16_t value){
+    int16_t correct(const int16_t param_id, const int16_t value){
         // Does nothing for now
         return value;
     }

@@ -1,3 +1,4 @@
+#pragma once
 /*!
  *  @file Adafruit_INA260.h
  *

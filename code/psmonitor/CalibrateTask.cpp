@@ -50,53 +50,59 @@
 namespace CalibrateTask {
 
     /// Define values for the various states of the calibration state machine
-    typedef enum _state {
-        CALIBRATE_INITIALIZE = 0,
-        CALIBRATE_PROMPT_LOW_V = 1,
-        CALIBRATE_READ_LOW_V_PROMPT_HIGH_V = 2,
-        CALIBRATE_READ_HIGH_V_PROMPT_LOW_I = 3,
-        CALIBRATE_READ_LOW_I_PROMPT_HIGH_I = 4,
-        CALIBRATE_READ_HIGH_I_FINISH = 5,
-    } CALIBRATE_STATE;
+    enum CALIBRATE_STATE : uint8_t
+    {
+        CALIBRATE_INITIALIZE,
+        CALIBRATE_PROMPT_LOW_V,
+        CALIBRATE_READ_LOW_V_PROMPT_HIGH_V,
+        CALIBRATE_READ_HIGH_V_PROMPT_LOW_I,
+        CALIBRATE_READ_LOW_I_PROMPT_HIGH_I,
+        CALIBRATE_READ_HIGH_I_FINISH,
+    };
 
-    // Forward declarations as needed
-    char* generateVoltageString(int16_t value);
-    void updateCalibrationData(int measurement_type, int position, int16_t actual);
+    // Forward declarations as needed for functions used only in this task
+    namespace
+    {
+
+      char* generateVoltageString(const int16_t value);
+      void updateCalibrationData(const int16_t measurement_type, const int16_t position, const int16_t actual);
+
+    }
 
     // Initialize additional variables
-    bool finishedFlag = false;
-    bool executeStep = true;
-    uint8_t currentState = CALIBRATE_INITIALIZE;
+    auto finishedFlag = bool{false};
+    auto executeStep = bool{true};
+    auto currentState = uint8_t{CALIBRATE_INITIALIZE};
     LiquidCrystal *lcd = nullptr;
     // int16_t rawPoints[4];     // (x1, y1), (x2, y2)
 
     /// Create required plus/minus special character for lcd
-    byte chr1[8] =  { 
-                    B00100,
-                    B00100,
-                    B11111,
-                    B00100,
-                    B00100,
-                    B00000,
-                    B11111,
-                    B00000
-                    };  
+    uint8_t chr1[8] = { 
+        B00100,
+        B00100,
+        B11111,
+        B00100,
+        B00100,
+        B00000,
+        B11111,
+        B00000
+    };  
 
-    // Define the prompt strings used, store 
+    // Define the prompt strings used, store in program memory
     const char promptIntro[] PROGMEM = "  Calibration";
     const char promptPushButton[] PROGMEM = "  Push Button";
     const char promptVolts[] PROGMEM = "Volts:  ";
     const char promptCurrent[] PROGMEM = "mAmps:  ";
 
     // Calibration target values
-    const int CALIBRATE_LOW_V = LIMIT_MAX_VOLTAGE / 10;
-    const int CALIBRATE_HIGH_V = LIMIT_MAX_VOLTAGE / 10 * 9;
-    const int CALIBRATE_LOW_I = LIMIT_MAX_CURRENT / 10;
-    const int CALIBRATE_HIGH_I = LIMIT_MAX_CURRENT / 10 * 9;
+    constexpr int16_t CALIBRATE_LOW_V = LIMIT_MAX_VOLTAGE / 10;
+    constexpr int16_t CALIBRATE_HIGH_V = (LIMIT_MAX_VOLTAGE / 10) * 9;
+    constexpr int16_t CALIBRATE_LOW_I = LIMIT_MAX_CURRENT / 10;
+    constexpr int16_t CALIBRATE_HIGH_I = (LIMIT_MAX_CURRENT / 10) * 9;
 
     // Raw calibration data sent to Calibration utility
-    int16_t actuals[8];     // Actual values that *should* have benn set by technician
-    int16_t measured[8];    // Raw measured values corresponding to actuals
+    int16_t actuals[8] = {};     // Actual values that *should* have been set by technician
+    int16_t measured[8] = {};    // Raw measured values corresponding to actuals
 
     /**
     * @brief Configures the calibrate task LCD display and loads special characters into display.
@@ -104,11 +110,8 @@ namespace CalibrateTask {
     * @param display   Pointer to the LCD display object
     */
     void setup(LiquidCrystal *display) {
-        // Save the pointer to the lcd display
-        lcd = display;
-
         // Load required special character into lcd 
-        lcd->createChar(1, chr1);
+        display->createChar(1, chr1);
     }
 
     /**
@@ -204,45 +207,51 @@ namespace CalibrateTask {
         }
     }
 
-    /**
-    * @brief Generates a voltage string from the provided integer value.
-    *
-    * Generate voltage string from provided value. Takes value in millivolts and presents as decimal
-    * volts with precision to thousandths of a volt.
-    *
-    * @param value   Integer value of voltage in millivolts
-    *
-    * @return String representing decimal volts to thousandths of a volt
-    */
-    char* generateVoltageString(int16_t value) {
-        // Generate the string from integer values
-        (void) sprintf(string_buf, "%5d", value);
-        // Set seventh character to nul to terminate string
-        string_buf[6] = 0;
-        // Move rightmost 3 digits to the right. Not worth a loop.
-        string_buf[5] = string_buf[4];
-        string_buf[4] = string_buf[3];
-        string_buf[3] = string_buf[2];
-        // Add decimal point
-        string_buf[2] = '.';
-        return string_buf;
-    }
+    // Functions used only in this task
+    namespace
+    {
 
-    /**
-    * @brief Populates subset of calibration data array.
-    *
-    * Populates subset of calibration data array with data acquired during
-    * each step of the calibration process.
-    *
-    * @param measurement_type   Which parameter, voltage or current, was measured
-    * @param position   Which voltage or current was measured (high or low)
-    * @param actual     Voltage or current that technician *should* have set for this step
-    */
-    void updateCalibrationData(int measurement_type, int position, int16_t actual) {
-        measured[MEASURED_POS + position] = readings[measurement_type + MONITOR_POS];
-        measured[MEASURED_NEG + position] = readings[measurement_type + MONITOR_NEG];
-        actuals[MEASURED_POS + position] = actual;
-        actuals[MEASURED_NEG + position] = actual;
+      /**
+      * @brief Generates a voltage string from the provided integer value.
+      *
+      * Generate voltage string from provided value. Takes value in millivolts and presents as decimal
+      * volts with precision to thousandths of a volt.
+      *
+      * @param value   Integer value of voltage in millivolts
+      *
+      * @return String representing decimal volts to thousandths of a volt
+      */
+      char* generateVoltageString(const int16_t value) {
+          // Generate the string from integer values
+          (void) sprintf(string_buf, "%5d", value);
+          // Set seventh character to nul to terminate string
+          string_buf[6] = 0;
+          // Move rightmost 3 digits to the right. Not worth a loop.
+          string_buf[5] = string_buf[4];
+          string_buf[4] = string_buf[3];
+          string_buf[3] = string_buf[2];
+          // Add decimal point
+          string_buf[2] = '.';
+          return string_buf;
+      }
+
+      /**
+      * @brief Populates subset of calibration data array.
+      *
+      * Populates subset of calibration data array with data acquired during
+      * each step of the calibration process.
+      *
+      * @param measurement_type   Which parameter, voltage or current, was measured
+      * @param position   Which voltage or current was measured (high or low)
+      * @param actual     Voltage or current that technician *should* have set for this step
+      */
+      void updateCalibrationData(const int measurement_type, const int position, const int16_t actual) {
+          measured[MEASURED_POS + position] = readings[measurement_type + MONITOR_POS];
+          measured[MEASURED_NEG + position] = readings[measurement_type + MONITOR_NEG];
+          actuals[MEASURED_POS + position] = actual;
+          actuals[MEASURED_NEG + position] = actual;
+      }
+
     }
 
 }
